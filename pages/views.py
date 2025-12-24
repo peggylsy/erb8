@@ -9,4 +9,4 @@ def index(request):
 def about (request):
     print(request, request.path)
     return render(request,'pages/about.html')
-    
+
