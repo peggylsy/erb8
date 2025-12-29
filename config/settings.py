@@ -39,7 +39,10 @@ DJANGO_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',]
+    'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    
+]
 # logo, image -> seldom change 
 
 APPLICATION_APPS = ['pages.apps.PagesConfig',
@@ -47,9 +50,11 @@ APPLICATION_APPS = ['pages.apps.PagesConfig',
                     'listings.apps.ListingsConfig',
                     ]
 
-INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS
+THIRD_PARTY_APPS = ["debug_toolbar",]
+INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -139,3 +144,12 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]

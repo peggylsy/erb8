@@ -1,7 +1,7 @@
 from django.db import models
 from doctors.models import Doctor
 # Create your models here.
-class listing(models.Model):
+class Listing(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
