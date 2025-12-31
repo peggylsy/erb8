@@ -30,8 +30,8 @@ DEBUG = True
 ALLOWED_HOSTS = [] 
 # Domain ip 127.0.0.1 / localhost
 # if use 404 page, enabel below two items
-#DEBUG = False
-#ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+# DEBUG = False
+# ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Application definition
 
