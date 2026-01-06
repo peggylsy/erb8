@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages,auth
 from django.contrib.auth.models import User
-
+from contacts.models import Contact
 # Create your views here.
 def login(request):
     if request.method =="POST":
@@ -41,7 +41,9 @@ def register(request):
                     messages.error(request, 'Email already exists')
                     return redirect("accounts:register")
                 else:
-                    user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name)
+                    user = User.objects.create_user(
+                        username=username, password=password, 
+                        email=email, first_name=first_name, last_name=last_name)
                     user.save()
                     messages.success(request, 'You are now registered and can log in')
                     return redirect("accounts:login")
@@ -52,4 +54,7 @@ def register(request):
         return render(request, 'accounts/register.html')
 
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+        user_contacts = Contact.objects.all( ).filter(
+            user_id=request.user.id).order_by('-contact_date')
+        context = {"contacts" :  user_contacts}
+        return render(request, 'accounts/dashboard.html', context)
