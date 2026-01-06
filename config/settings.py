@@ -44,6 +44,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'widget_tweaks'
     
 ]
 # logo, image -> seldom change 
@@ -55,7 +56,7 @@ APPLICATION_APPS = ['pages.apps.PagesConfig',
                     'contacts.apps.ContactsConfig',
                     ]
 
-THIRD_PARTY_APPS = ["debug_toolbar",]
+THIRD_PARTY_APPS = ["debug_toolbar", 'taggit']
 INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
