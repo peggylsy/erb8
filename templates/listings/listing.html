@@ -2,7 +2,11 @@
 <!-- load static -->
 {% load static %}
 <!-- load humanize-->
-{% load humanize %} {% block content %} 
+{% load humanize %}
+<!-- block title -->
+{%block title %} | {{listing.title | title}} {% endblock %}
+<!-- main content-->
+{% block content %}
     <section id="showcase-inner" class="py-5 text-white">
       <div class="container">
         <div class="row text-center">
@@ -147,7 +151,33 @@
                 </ul>
               </div>
             </div>
-
+            <!-- professional -->
+            <div class = "row mb-5">
+              <h4 class="4mr-3 text-secondary">Professions</h4>
+            {% if listing.professions.all %}
+            <ul>
+              {% for profession in listing.professions.all %}
+              <li class="mr-3"> <h4>{{profession.name}}</h4></li>
+              {% endfor %}
+            </ul>
+            {% else %}
+              <p class = "text-secondary">No Professions listed.</p>
+            {% endif %}
+            </div>
+            <!-- services -->
+            <div class="row mb-5">
+              <h4 class="text-secondary">Services : </h4>
+              {% if listing.services.all %}
+              <!-- service tag -->
+              <ul>
+              {% for service_tag in listing.services.all %}
+                <li class="mr-3"><h4>{{service_tag.name | title}}</h4></li>
+              {% endfor %}
+              </ul>
+              {% else %}
+              <h4> No services</h4>
+              {% endif %}
+            </div>
             <!-- Description -->
             <div class="row mb-5">
               <div class="col-md-12">
@@ -193,6 +223,7 @@
             <form method="POST" action = "{% url 'contacts:contact' %}">
               {% csrf_token %}
               <input type="hidden" name="listing_id" value="{{listing.id}}" />
+              <input type="hidden" name="doctor_email" value="{{listing.doctor.email}}" />
               {% if user.is_authenticated %}
               <input type="hidden" name="user_id" value="{{user.id}}" />
               {% else %}
@@ -224,7 +255,7 @@
                   type="email"
                   name="email"
                   class="form-control"
-                  {% if user.is_authenticated %}/ value="{{user.first_name}} {{user.last_name}}"
+                  {% if user.is_authenticated %}/ value="{{user.email}}"
                 readonly {% endif %}
                 />
               </div>
